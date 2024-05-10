@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		<a href="index.html">인덱스 페이지</a>
+        
+        <h1>unordered list</h1> <!-- 순서가 없는 리스트(목록) -->
+        <ul style="list-style:square;">
+        <!-- list-style의 기본값은 disc. none으로 설정하면 bullet 이미지가 사라짐. -->
+            <li>범죄도시4</li> <!-- list item -->
+            <li>눈물의 여왕</li>
+            <li>나는 솔로</li>
+        </ul>
+        
+        <h1>Ordered list</h1> <!-- 순서가 있는 리스트(목록) -->
+        
+	</body>
+</html>
