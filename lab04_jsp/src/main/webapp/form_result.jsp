@@ -7,7 +7,7 @@
     <title>form result</title>
     <style>
     <%
-    // 질의 몬자열(query string)에 포함된 요청 파라미터의 값을 찾음:
+    // 질의 문자열(query string)에 포함된 요청 파라미터의 값을 찾음:
     String color = request.getParameter("color");
     String textColor = "";
     switch (color) {
