@@ -13,8 +13,8 @@ create table posts (
 );
 
 insert into posts (title, content, author)
-values ('test', 'Servlet/JSP test', 'admin');
+values ('화요일', 'MVC', 'guest');
 
 commit;
 
-select * from posts;
+select * from posts order by id desc;
