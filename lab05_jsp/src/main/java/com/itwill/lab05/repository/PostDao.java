@@ -21,7 +21,7 @@ import com.zaxxer.hikari.HikariDataSource;
 public enum PostDao {
 	INSTANCE;
 	
-	private static final Logger log = LoggerFactory.getLogger(PostDao.class);
+	private static final Logger log = LoggerFactory.getLogger(PostDao.class); // 로그를 출력하기 위한 객체
 	private final HikariDataSource ds = DataSourceUtil.getInstance().getDataSource();
 	
 	// select() 메서드에서 실행할 SQL:
@@ -102,7 +102,7 @@ public enum PostDao {
 		
 		try {
 			conn = ds.getConnection();
-			stmt = conn.prepareStatement(SQL_INSERT);
+			stmt = conn.prepareStatement(SQL_DELETE);
 			stmt.setInt(1, id);
 			result = stmt.executeUpdate();
         } catch (SQLException e) {
@@ -141,6 +141,34 @@ public enum PostDao {
 		}
 		
 		return post;
+	}
+	
+	// posts 테이브에서 id(PK)를 검색해서 업데이트하는 SQL:
+	private static final String SQL_UPDATE = "update posts set title = ?, content = ?, modified_time = systimestamp where id = ?";
+	
+	public int update(Post post) {
+		log.debug("update({})", post);
+		log.debug(SQL_UPDATE);
+		
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		int result = 0;
+		
+		try {
+			conn = ds.getConnection();
+			stmt = conn.prepareStatement(SQL_UPDATE);
+			stmt.setString(1, post.getTitle());
+			stmt.setString(2, post.getContent());
+			stmt.setInt(3, post.getId());
+			result = stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeResources(conn, stmt);
+		}
+		
+		return result;
 	}
 	
 	private Post fromResultSetToPost(ResultSet rs) throws SQLException {

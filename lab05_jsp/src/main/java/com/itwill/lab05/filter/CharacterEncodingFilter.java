@@ -36,6 +36,9 @@ public class CharacterEncodingFilter extends HttpFilter {
         
         // 다음 필터 체인을 진행(-> 서블릿 메서드(doGet, doPost) 호출)
         chain.doFilter(request, response);
+        
+        // 홈페이지에 접속한 ip 추적을 위한 log 출력문
+        log.debug(request.getRemoteAddr());
     }
 
 }
