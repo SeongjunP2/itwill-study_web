@@ -3,6 +3,7 @@ package com.itwill.lab05.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.itwill.lab05.repository.Post;
 import com.itwill.lab05.repository.User;
 import com.itwill.lab05.repository.UserDao;
 
@@ -33,6 +34,16 @@ public enum UserService {
 		log.debug("로그인 결과 = {}", user);
 		
 		return user;
+	}
+	
+	public User read(String userId) {
+		log.debug("read(id={})", userId);
+		
+		// 영속성 계층의 메서드를 호출해서 DB 테이블에서 id로 검색하는 SQL을 실행.
+		User user = userDao.selectByUserid(userId);
+		log.debug("{}", user);
+		
+		return user; //컨트롤러에게 검색한 Post 객체를 리턴.
 	}
 
 }

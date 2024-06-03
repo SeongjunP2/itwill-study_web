@@ -87,6 +87,59 @@ public enum UserDao {
 		return result;
 	}
 	
+	
+	private static final String SQL_SELECT_BY_ID = "select * from users where userid = ?";
+	
+	public User selectByUserid(String userId) {
+		log.debug("selectByUseridandPassword({})", userId);
+		log.debug(SQL_SELECT_BY_ID);
+		
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		User result = null;
+		
+		try {
+			conn = ds.getConnection();
+			stmt = conn.prepareStatement(SQL_SELECT_BY_ID);
+			stmt.setString(1, userId);
+			rs = stmt.executeQuery();
+			if (rs.next()) {
+				result = fromResultSetToUser(rs);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+            closeResources(conn, stmt);
+        }
+		
+		return result;
+	}
+	
+	// TODO: SQL 문자열, 메서드 추가(USERS.POINTS 컬럼 업데이트)
+	private static final String SQL_POINTS = "update users set points = points + ? where userid = ?";
+	
+	public int updatePoint (String user, int point) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		int result = 0;
+		
+		try {
+			conn = ds.getConnection();
+			stmt = conn.prepareStatement(SQL_POINTS);
+			stmt.setInt(1, point);
+			stmt.setString(2, user);
+			result = stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeResources(conn, stmt);
+		}
+		
+		return result;
+	}
+	
 	private User fromResultSetToUser(ResultSet rs) throws SQLException {
 		int id = rs.getInt("id");
 		String userid = rs.getString("userid");

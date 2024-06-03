@@ -30,3 +30,5 @@ create table users (
     constraint users_email_uq unique (email),
     constraint users_points_ck check (points >= 0)
 );
+
+select * from users order by id desc;

@@ -14,29 +14,31 @@
 </head>
 <body>
     <div class="container-fluid">
+    <c:set var="pageTitle" value="User Info" /> <%-- scope의 기본값은 page --%>
+    <%@ include file="../fragments/header.jspf" %>
+    
         <main>
-            <div class="card mt-2">
+            <div class="mt-2 card">
                 <div class="card-header">
-                    <h2>로그인</h2>
+                    <h2>내 정보 보기</h2>
                 </div>
                 <div class="card-body">
-                    <c:if test="${not empty param.result && param.result eq 'f'}">
-                        <div class="text-danger">아이디와 패스워드를 확인하세요.</div>
-                    </c:if>
-                
-                    <c:url var="signInPage" value="/user/signin" />
-                    <form method="post" action="${signInPage}">
+                    <form>
                         <div class="mt-2">
-                            <input type="text" name="userid" placeholder="아이디" class="form-control" required autofocus />
+                            <label for="userid" class="form-label">아이디</label>
+                            <input id="userid" class="form-control" type="text" value="${user.userid}" readonly />
                         </div>
                         <div class="mt-2">
-                            <input type="password" name="password" placeholder="비밀번호" class="form-control" required />
-                        </div>
-                        <div class="d-none">
-                            <input name="target" value="${param.target}" readonly />
+                            <label for="password" class="form-label">비밀번호</label>
+                            <input id="password" class="form-control" type="text" value="${user.password}" readonly />
                         </div>
                         <div class="mt-2">
-                            <input class="form-control btn btn-outline-success" type="submit" value="로그인" />
+                            <label for="email" class="form-label">이메일</label>
+                            <input id="email" class="form-control" type="text" value="${user.email}" readonly />
+                        </div>
+                        <div class="mt-2">
+                            <label for="points" class="form-label">포인트</label>
+                            <input id="points" class="form-control" type="text" value="${user.points}" readonly />
                         </div>
                     </form>
                 </div>
@@ -44,6 +46,8 @@
         </main>
     </div>
     
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
         crossorigin="anonymous"></script>
