@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwill.spring1.dto.UserDto;
 
 import lombok.extern.slf4j.Slf4j;
 
-// POCO(Plain Old C# Object)
+// POCO(Plain Old C++(C#) Object)
 // POJO(Plain Old Java Object): 간단한 오래된 자바 객체.
 // 특정 클래스를 상속(extends)하거나, 특정 인터페이스를 구현(implements)할 필요가 없는
 // (상위 타입의 특정 메서드들을 반드시 재정의할 필요가 없는) 평범한 자바 객체.
@@ -103,6 +104,28 @@ public class ExampleController {
 		return "redirect:/test";
 		// 컨트롤러 메서드가 "redirect:" 시작하는 문자열을 리턴 -> 리다이렉트 이동.
 		// 리다이렉트 방식의 페이지 이동 - 최초 요청 주소가 리다이렉트 되는 주소로 바뀜!
+	}
+	
+	@GetMapping("/rest1")
+	@ResponseBody
+	//-> 컨트롤러 메서드가 리턴하는 값이 뷰를 찾기 위한 문자열이 아니라,
+	// 클라이언트로 직접 응답되는 데이터. 
+	// 응답 패킷(response packet)의 몸통(body)에 포함되는 데이터.
+	public String rest1() {
+		log.debug("rest1()");
+		
+		return "Hello. 안녕하세요!";
+	}
+	
+	@GetMapping("/rest2")
+	@ResponseBody //-> 리턴 값이 클라이언트로 직접 응답되는 객체.
+	public UserDto rest2() {
+		log.debug("rest2()");
+		
+		return UserDto.builder().username("홍길동").age(16).build();
+		//-> REST 컨트롤러가 리턴한 자바 객체를 jackson-databind 라이브러리에서
+		// JSON(JavaScript Object Notation) 형식의 문자열로 변환하고,
+		// 클라이언트로 응답을 보냄.
 	}
 	
 }
