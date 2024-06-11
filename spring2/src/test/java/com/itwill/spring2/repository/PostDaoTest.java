@@ -18,17 +18,49 @@ import lombok.extern.slf4j.Slf4j;
 		)
 public class PostDaoTest {
 	
-	@Autowired
+	@Autowired // 의존성 주입(DI)
 	private PostDao postDao;
 	
-	@Test
+//	@Test
 	public void testSelectAll() {
 		Assertions.assertNotNull(postDao);
 		
 		List<Post> list = postDao.selectOrderByIdDesc();
 		for (Post p : list) {
-			System.out.println(p);
+			System.out.println("\t" + p);
 		}
+	}
+	
+//	@Test
+	public void testSelectById() {
+		Post post1 = postDao.selectById(1); // DB 테이블에 id가 있는 경우
+		Assertions.assertNotNull(post1);
+		log.debug(post1.toString());
+		
+		Post post2 = postDao.selectById(100); // DB 테이블에 id가 없는 경우
+		Assertions.assertNull(post2);
+	}
+	
+//	@Test
+	public void testInsert() {
+		// insert할 데이터
+		Post post = Post.builder().title("MyBatis 테스트").content("MyBatis-Spring insert 테스트").author("admin").build();
+		int result = postDao.insertPost(post);
+		Assertions.assertEquals(1, result);
+	}
+	
+//	@Test
+	public void testUpdate() {
+		// 업데이트할 포스트 객체
+		Post post = Post.builder().id(62).title("MyBatis 업데이트 테스트").content("MyBatis-Spring update 테스트").build();
+		int result = postDao.updatePost(post);
+		Assertions.assertEquals(1, result);
+	}
+	
+	@Test
+	public void testDelete() {
+		int result = postDao.deletePost(62);
+		Assertions.assertEquals(1, result);
 	}
 
 }

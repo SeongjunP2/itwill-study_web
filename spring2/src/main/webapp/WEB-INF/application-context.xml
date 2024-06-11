@@ -29,7 +29,7 @@
     -->
     <bean id="session" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="ds" />
-        <property name="mapperLocations" value="classpath:/mappers/**/*.xml" />
+        <property name="mapperLocations" value="classpath:/mappers/**/*.xml" /> <!-- buildpath에 추가되어 있는 경로에서 classpath를 찾음 -->
         <property name="configLocation" value="classpath:mybatis-config.xml" />
     </bean>
     
@@ -37,5 +37,11 @@
         base-package와 그 하위 패키지에 있는 인터페이스들을 구현한 객체를 생성해 줌.
     -->
     <mybatis:scan base-package="com.itwill.spring2.repository" />
+    
+    <!-- 스프링 컨테이너에서 컴포넌트 빈들을 검색할 기본 패키지를 설정
+    스프링 컨테이너가 설정된 패키지와 그 하위 패키지를 검색해서
+    컴포넌트 애너테이션(예: @Service, @Component, ...)이 선언된 클래스의 객체를 생성/관리.
+    필요한 곳에 의존성을 주입해 줌. -->
+    <context:component-scan base-package="com.itwill.spring2.service" />
 
 </beans>
