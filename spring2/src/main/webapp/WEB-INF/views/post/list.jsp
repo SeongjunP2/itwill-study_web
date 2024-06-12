@@ -15,35 +15,66 @@
 <body>
     <div class="container-fluid">
         <c:set var="pageTitle" value="Post List" />
-        <%@ include file="../fragments/header.jspf" %>
-    </div>
+        <%@ include file="../fragments/header.jspf"%>
 
-    <div class="card-body">
-        <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Title</th>
-                <th>Author</th>
-                <th>M.T</th>
-            </tr>
-        </thead>
-        <tbody>
-            <c:forEach items="${ posts }" var="p">
-                <tr>
-                    <td>${ p.id }</td>
-                    <td>
-                        <c:url var="postDetailsPage" value="/post/details">
-                            <c:param name="id" value="${p.id}"></c:param>
-                        </c:url>
-                    <a href="${postDetailsPage}">${ p.title }</a> 
-                    </td>
-                    <td>${ p.author }</td>
-                    <td>${ p.modifiedTime }</td>
-                </tr>
-            </c:forEach>
-        </tbody>
-        </table>
+        <main>
+            <div class="mt-2 card">
+                <div class="card-header">
+                    <c:url var="postSearchPage" value="/post/search" />
+                    <form method="get" action="${postSearchPage}">
+                        <div class="row">
+                            <div class="col-3">
+                                <select class="form-control"
+                                    name="category">
+                                    <option value="t">제목</option>
+                                    <option value="c">내용</option>
+                                    <option value="tc">제목 + 내용</option>
+                                    <option value="a">작성자</option>
+                                </select>
+                            </div>
+                            <div class="col-7">
+                                <input type="text" class="form-control"
+                                    name="keyword" placeholder="검색어 입력"
+                                    required />
+                            </div>
+                            <div class="col-2">
+                                <input type="submit"
+                                    class="form-control btn btn-outline-secondary"
+                                    value="검색" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>M.T</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${ posts }" var="p">
+                                <tr>
+                                    <td>${ p.id }</td>
+                                    <td><c:url
+                                            var="postDetailsPage"
+                                            value="/post/details">
+                                            <c:param name="id"
+                                                value="${p.id}"></c:param>
+                                        </c:url> <a href="${postDetailsPage}">${ p.title }</a>
+                                    </td>
+                                    <td>${ p.author }</td>
+                                    <td>${ p.modifiedTime }</td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
