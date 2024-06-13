@@ -12,5 +12,6 @@
     <!-- 매퍼 XML 파일에서 resultType 속성을 설정할 때 간단히 하기 위해서 -->
     <typeAliases>
         <typeAlias type="com.itwill.spring2.repository.Post" alias="Post"/> <!-- type 경로에 있는 파일에 Post라는 alias(별명) 부여 -->
+        <typeAlias type="com.itwill.spring2.repository.Comment" alias="Comment" />
     </typeAliases>
 </configuration>

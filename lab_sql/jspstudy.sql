@@ -32,3 +32,8 @@ create table users (
 );
 
 select * from users order by id desc;
+
+select * from posts
+where upper(title) like upper('%T%')
+    or upper(content) like upper('%t%')
+order by id desc;
