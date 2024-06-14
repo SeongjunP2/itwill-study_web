@@ -66,15 +66,6 @@ public class CommentService {
 		return result;
 	}
 	
-	public int updateById(int id, CommentUpdateDto dto) {
-		log.debug("update({})", id, dto);
-		
-		// 리포지토리 컴포넌트의 메서드를 호출해서 comments 테이블을 업데이트.
-		int result = commentDao.updateById(id, dto.toEntity());
-		
-		return result;
-	}
-	
 	public int deleteById(Integer id) {
 		log.debug("deleteById(id={})", id);
 		

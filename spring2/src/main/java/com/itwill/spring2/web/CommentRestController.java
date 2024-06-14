@@ -78,8 +78,8 @@ public class CommentRestController {
     @PutMapping("/{id}")
     public ResponseEntity<Integer> updateComment(@PathVariable int id, @RequestBody CommentUpdateDto dto) {
     	log.debug("updateComment({})", id, dto);
-    	
-    	int result = commentService.updateById(id, dto);
+    	dto.setId(id);
+    	int result = commentService.update(dto);
     	
     	return ResponseEntity.ok(result);
     }
