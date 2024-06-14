@@ -13,6 +13,8 @@ public interface CommentDao {
 	// 댓글 내용, 수정 시간을 업데이트
 	int update(Comment comment);
 	
+	int updateById(int id, Comment comment);
+	
 	// 댓글 아이디로 삭제
 	int deleteById(Integer id);
 	
