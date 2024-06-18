@@ -13,5 +13,6 @@
     <typeAliases>
         <typeAlias type="com.itwill.spring2.repository.Post" alias="Post"/> <!-- type 경로에 있는 파일에 Post라는 alias(별명) 부여 -->
         <typeAlias type="com.itwill.spring2.repository.Comment" alias="Comment" />
+        <typeAlias type="com.itwill.spring2.repository.User" alias="User" />
     </typeAliases>
 </configuration>
