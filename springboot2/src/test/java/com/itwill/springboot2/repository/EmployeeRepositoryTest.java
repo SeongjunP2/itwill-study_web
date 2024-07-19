@@ -44,17 +44,16 @@ public class EmployeeRepositoryTest {
 	//@Test
 	public void findByTest() {
 		// TODO: 사번으로 검색하는 매서드를 찾아서 단위 테스트 코드 작성.
-		Optional<Employee> employee = empRepo.findById(7369);
 		
-		System.out.println(employee);
+        // 사번이 테이블에 있는 경우:
+        Optional<Employee> emp1 = empRepo.findById(7788);
+        Employee scott = emp1.get();
+        assertThat(scott.getEname()).isEqualTo("SCOTT");
+        log.info("scott: {}", scott);
+        
+        // 사번이 테이블에 없는 경우:
+        Optional<Employee> emp2 = empRepo.findById(1000);
+        Employee none = emp2.orElseGet(() -> null);
+        assertThat(none).isNull();
 	}
-	
-	// TODO: DEPT 테이블과 매핑되는 엔터티 클래스를 설계, 리포지토리 인터페이스 작성(도메인, 인터페이스)
-	// 단위 테스트 클래스 작성.
-	@Test
-	public void testd() {
-		assertThat(deptRepo).isNull();
-		log.info("***** deptRepo: {}", deptRepo);
-	}
-
 }
