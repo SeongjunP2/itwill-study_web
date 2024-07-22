@@ -10,13 +10,15 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.springboot2.domain.Department;
+import com.itwill.springboot2.domain.Employee;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class) // @Order으로 @Test 메서드의 순서를 지정하기 위한 @TestMethodOrder
 @SpringBootTest
 public class DepartmentRepositoryTest {
     @Autowired
@@ -30,7 +32,8 @@ public class DepartmentRepositoryTest {
         log.info("deptRepo: {}", deptRepo);
     }
     
-    //@Test
+    @Transactional
+    @Test
     @Order(2)
     public void findAllTest() {
         // dept 테이블 전체 검색 테스트: 행의 개수가 4개이면 성공.
@@ -40,7 +43,8 @@ public class DepartmentRepositoryTest {
         list.forEach(System.out::println);
     }
     
-    //@Test
+    @Transactional
+    @Test
     @Order(3)
     public void findByTest() {
         // 부서번호(deptno 컬럼, id 필드)로 검색 테스트
@@ -48,6 +52,10 @@ public class DepartmentRepositoryTest {
         Department dept1 = deptRepo.findById(10).orElseThrow();
         assertThat(dept1.getId()).isEqualTo(10);
         log.info("dept1: {}", dept1);
+        
+        // OneToMany 관계: 10번 부서의 모든 직원 정보 출력
+        List<Employee> employees = dept1.getEmployees();
+        employees.forEach(System.out::println);
         
         // 부서번호가 테이블에 없는 경우:
         boolean isEmpty = deptRepo.findById(100).isEmpty();

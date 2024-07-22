@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.springboot2.domain.Employee;
 
@@ -21,7 +22,6 @@ public class EmployeeRepositoryTest {
 	
 	@Autowired // 의존성 주입(DI: dependency injection), 제어의 역전(IoC: Inversion of Control)
 	private EmployeeRepository empRepo;
-	private DepartmentRepository deptRepo;
 	
 	//@Test
 	public void test() {
@@ -41,6 +41,7 @@ public class EmployeeRepositoryTest {
 		}
 	}
 	
+	@Transactional
 	//@Test
 	public void findByTest() {
 		// TODO: 사번으로 검색하는 매서드를 찾아서 단위 테스트 코드 작성.
@@ -50,10 +51,25 @@ public class EmployeeRepositoryTest {
         Employee scott = emp1.get();
         assertThat(scott.getEname()).isEqualTo("SCOTT");
         log.info("scott: {}", scott);
+        log.info("dept={}", scott.getDepartment());
         
         // 사번이 테이블에 없는 경우:
         Optional<Employee> emp2 = empRepo.findById(1000);
         Employee none = emp2.orElseGet(() -> null);
         assertThat(none).isNull();
+	}
+	
+	@Transactional
+	@Test
+	public void findManagerTest() {
+		// 사번 7369인 직원 정보 검색
+//		Optional<Employee> emp = empRepo.findById(7369);
+		Employee emp = empRepo.findById(7369).orElseThrow();
+		assertThat(emp.getId()).isEqualTo(7369);
+		log.info("emp={}", emp);
+		
+		Employee mgr = emp.getManager();
+		assertThat(mgr.getId()).isEqualTo(7902); // 7369 직원의 매니저는 7902
+		log.info("mgr={}", mgr);
 	}
 }

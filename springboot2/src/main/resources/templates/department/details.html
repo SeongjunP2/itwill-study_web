@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Spring Boot 2</title>
+	</head>
+	<body>
+        <div th:replace="~{/layout/fragments :: pageHeader('부서 상세 페이지')}"></div>
+        
+        <div th:Object="${department}">
+            사번: <span th:text="*{id}"></span>
+            <br/>
+            이름: <span th:text="*{dname}"></span>
+            <br/>
+            직무: <span th:text="*{location}"></span>
+        </div>
+	</body>
+</html>
