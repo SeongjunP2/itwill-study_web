@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Spring Boot 3</title>
+	</head>
+	<body>
+        <div th:replace="~{/layout/fragments :: pageHeader('업무 상세 페이지')}"></div>
+		
+        <main>
+            <table>
+                <tbody th:Object="${job}">
+                    <tr>
+                        <th>번호</th>
+                        <td th:text="*{id}"></td>
+                    <tr/>
+                    <tr>
+                        <th>업무 이름</th>
+                        <td th:text="*{jobTitle}"></td>
+                    <tr/>
+                    <tr>
+                        <th>최소 급여</th>
+                        <td th:text="*{minSalary}"></td>
+                    <tr/>
+                    <tr>
+                        <th>최대 급여</th>
+                        <td th:text="*{maxSalary}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+	</body>
+</html>

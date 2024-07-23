@@ -1,12 +1,11 @@
-package com.itwill.springboot2.service;
+package com.itwill.springboot3.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.itwill.springboot2.domain.Employee;
-import com.itwill.springboot2.repository.EmployeeRepository;
+import com.itwill.springboot3.domain.Employee;
+import com.itwill.springboot3.repository.EmployeeRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
