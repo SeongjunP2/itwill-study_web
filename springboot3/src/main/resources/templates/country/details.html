@@ -2,38 +2,26 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
-		<title>Spring Boot 2</title>
+		<title>Spring Boot 3</title>
 	</head>
 	<body>
         <div th:replace="~{/layout/fragments :: pageHeader('나라 상세 페이지')}"></div>
 		
         <main>
             <table>
-                <tbody th:Object="${location}">
+                <tbody th:Object="${country}">
                     <tr>
-                        <th>위치 번호</th>
+                        <th>나라 ID</th>
                         <td th:text="*{id}"></td>
                     <tr/>
                     <tr>
-                        <th>도로명</th>
-                        <td th:text="*{streetAddress}"></td>
+                        <th>나라 이름</th>
+                        <td th:text="*{countryName}"></td>
                     <tr/>
                     <tr>
-                        <th>우편번호</th>
-                        <td th:text="*{postalCode}"></td>
+                        <th>대륙 번호</th>
+                        <td th:text="*{region.regionName}"></td>
                     <tr/>
-                    <tr>
-                        <th>도시</th>
-                        <td th:text="*{city}"></td>
-                    </tr>
-                    <tr>
-                        <th>주</th>
-                        <td th:text="*{stateProvince}"></td>
-                    </tr>
-                    <tr>
-                        <th>나라</th>
-                        <td th:text="*{country.countryName}"></td>
-                    </tr>
                 </tbody>
             </table>
         </main>

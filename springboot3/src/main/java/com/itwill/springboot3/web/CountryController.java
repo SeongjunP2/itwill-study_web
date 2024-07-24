@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itwill.springboot3.domain.Country;
@@ -28,6 +29,17 @@ public class CountryController {
 		List<Country> list = countrySvc.read();
 		
 		model.addAttribute("countries", list);
+	}
+	
+	@GetMapping("/details/{id}")
+	public String details(@PathVariable String id, Model model) {
+		log.info("details(id={})", id);
+		
+		Country country = countrySvc.readById(id);
+		
+		model.addAttribute("country", country);
+		
+		return "country/details";
 	}
 
 }

@@ -36,7 +36,7 @@ public class CountryRepositoryTest {
 		Country country = countryRepo.findById("AR").orElseThrow();
 		
 		log.info("country={}", country);
-		log.info("country.regionId={}", country.getRegionId());
+		log.info("country.region={}", country.getRegion());
 	}
 
 }

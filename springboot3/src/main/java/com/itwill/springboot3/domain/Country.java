@@ -23,6 +23,6 @@ public class Country {
 	@ToString.Exclude
 	@ManyToOne
 	@JoinColumn(name = "REGION_id")
-	private Region regionId;
+	private Region region;
 
 }
