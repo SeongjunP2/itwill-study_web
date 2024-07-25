@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
-		<meta charset="UTF-8">
-		<title>Spring Boot 3</title>
+		<th:block th:replace="~{/layout/fragments :: documentHeader}"></th:block>
 	</head>
 	<body>
-		<div th:replace="~{/layout/fragments :: pageHeader('나라 목록 페이지')}"></div>
+		<div th:replace="~{/layout/fragments :: pageHeader('나라 목록')}"></div>
         
-        <main>
-            <table>
+        <main class="m-2">
+            <table class="table table-striped table-hover">
                 <thead>
                     <tr>
                         <th>나라 ID</th>
@@ -16,7 +15,7 @@
                         <th>대륙 번호</th>
                     </tr>
                 </thead>
-                <tbody style="text-align: center;">
+                <tbody>
                     <tr th:each="country : ${countries}" th:object="${country}">
                         <td th:text="*{id}"></td>
                         <td th:text="*{countryName}"></td>
@@ -27,5 +26,7 @@
                 </tbody>
             </table>
         </main>
+        
+        <th:block th:replace="~{/layout/fragments :: bootstrapJS}"></th:block>
 	</body>
 </html>
