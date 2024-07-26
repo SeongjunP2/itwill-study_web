@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.springboot3.domain.Department;
+import com.itwill.springboot3.dto.DepartmentDetailsDto;
 import com.itwill.springboot3.service.DepartmentService;
 
 import lombok.RequiredArgsConstructor;
@@ -37,11 +38,19 @@ public class DepartmentController {
 	public String details(@PathVariable Integer id, Model model) {
 		log.info("details(id={})", id);
 		
-		Department department = deptsvc.readById(id);
+		DepartmentDetailsDto department = deptsvc.readById(id);
 		
 		model.addAttribute("department", department);
 		
 		return "department/details";
+	}
+	
+	@GetMapping("/details")
+	public void details(@RequestParam(name = "dname") String departmentName, Model model) {
+		log.info("details(departmentName={})", departmentName);
+		
+		DepartmentDetailsDto dto = deptsvc.read(departmentName);
+		model.addAttribute("department", dto);
 	}
 
 }

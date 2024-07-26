@@ -30,7 +30,7 @@
                             <a th:text="*{jobTitle}"></a>
                         </td>
                         <td>
-                            <a th:text="*{departmentName}"></a>
+                            <a th:href="@{/department/details(dname=*{departmentName})}" th:text="*{departmentName}"></a>
                         </td>
                     </tr>
                 </tbody>
