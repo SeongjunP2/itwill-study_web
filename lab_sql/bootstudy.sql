@@ -1,26 +1,16 @@
-select e.*, d.*
-from employees e
-    left join departments d
-        on e.department_id = d.department_id
-where d.department_name = 'IT';
+create table posts (
+    id number(9) generated as identity,
+    title varchar2(100 char) not null,
+    content varchar2(1000 char) not null,
+    author varchar2(20 char) not null,
+    created_time timestamp,
+    modified_time timestamp,
+    constraint posts_id_pk primary key(id)
+);
 
-select e.*
-from employees e
-    left join departments d on e.department_id = d.department_id
-    left join locations l on d.location_id = l.location_id
-where l.city = 'Seattle';
+insert into posts (title, content, author, created_time, modified_time)
+values ('Test title', 'Test content', 'Test author');
 
-select e.*, c.*
-from employees e
-    join departments d on e.department_id = d.department_id
-    join locations l on d.location_id = l.location_id
-    join countries c on l.country_id = c.country_id
-where c.country_name = 'Canada';
+commit;
 
-select e.*, r.*
-from employees e
-    join departments d on e.department_id = d.department_id
-    join locations l on d.location_id = l.location_id
-    join countries c on l.country_id = c.country_id
-    join regions r on c.region_id = r.region_id
-where r.region_name = 'Europe';
+select * from posts;

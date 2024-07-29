@@ -23,8 +23,8 @@
                     <h2>새 글 작성</h2>
                 </div>
                 <div class="card-body">
-                    <c:url var="newPostPage" value="/post/create" />
-                    <form method="post">
+                    <c:url var="postCreatePage" value="/post/create" />
+                    <form method="post" action="${postCreatePage}">
                     <!-- form에서 action 속성 값을 설정하지 않으면 현재 요청 주소로 다시 요청을 보냄. -->
                         <div class="mt-2"> <!-- 값을 입력하는 텍스트 입력칸 사이에 공백(margin) 부여하는 부트스트랩 클래스 -->
                             <input class="form-control" type="text" name="title" placeholder="제목" required autofocus />
@@ -35,6 +35,7 @@
                         <div class="mt-2">
                             <!-- 로그인 사용자 아이디를 author 입력 필드에 설정. -->
                             <input class="d-none" type="text" name="author" value="${signedInUser}" readonly required />
+                        </div>
                         <div class="mt-2">
                             <input class="form-control btn btn-outline-success" type="submit" value="저장" />
                         </div>
