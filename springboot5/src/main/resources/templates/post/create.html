@@ -8,12 +8,9 @@
         
         <main>
             <div class="mt-2 card">
-                <div class="card-header">
-                    <h3>새 글 등록</h3>
-                </div>
                 <div class="card-body">
                     <form method="post" th:action="@{/post/create}">
-                        <div class="mt-2">
+                        <div class="mt-2"> <!-- name 속성은 반드시 필요!(PostCreateDto의 필드 이름과 같게 해야함) -->
                             <input class="form-control" type="text" name="title" placeholder="제목" required autofocus />
                         </div>
                         <div class="mt-2">
