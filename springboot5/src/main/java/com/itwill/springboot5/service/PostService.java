@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.itwill.springboot5.domain.Post;
 import com.itwill.springboot5.dto.PostCreateDto;
 import com.itwill.springboot5.dto.PostListItemDto;
+import com.itwill.springboot5.dto.PostSearchRequestDto;
 import com.itwill.springboot5.dto.PostUpdateDto;
 import com.itwill.springboot5.repository.PostRepository;
 
@@ -84,6 +85,29 @@ public class PostService {
         // DB에서 검색한 entity 객체가 변경되면 update 쿼리가 자동으로 실행.
         // @Transactional 애너테이션을 사용하지 않은 경우,
         // postRepo.save(entity) 메서드를 직접 호출해야 함.
+	}
+	
+	@Transactional(readOnly = true)
+	public Page<PostListItemDto> search(PostSearchRequestDto dto, Sort sort) {
+		log.info("search(dto={}, sort={})", dto, sort);
+		
+		Pageable pageable = PageRequest.of(dto.getP(), 5, sort);
+		Page<Post> search = null; 
+		switch (dto.getCategory()) {
+		case "t":
+			search = postRepo.findByTitleContainingIgnoreCase(dto.getKeyword(), pageable);
+			break;
+		case "c":
+			search = postRepo.findByContentContainingIgnoreCase(dto.getKeyword(), pageable);
+			break;
+		case "tc":
+			search = postRepo.findByTitleOrContent(dto.getKeyword(), pageable);
+			break;
+		case "a":
+			search = postRepo.findByAuthorContainingIgnoreCase(dto.getKeyword(), pageable);
+			break;
+		}
+		return search.map(PostListItemDto::fromEntity);
 	}
 
 }
