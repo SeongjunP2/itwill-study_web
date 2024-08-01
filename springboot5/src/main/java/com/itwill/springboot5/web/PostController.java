@@ -32,6 +32,9 @@ public class PostController {
 		// 서비스 계층의 메서드를 호출 -> 뷰에 포스트 목록 전달
 		Page<PostListItemDto> list = postSvc.read(pageNo, Sort.by("id").descending()); // id를 기준으로 내림차순
 		model.addAttribute("page", list);
+		
+		// pagination fragment에서 사용하기 위한 현재 요청 주소 정보
+		model.addAttribute("baseUrl", "/post/list");
 	}
 	
 	@GetMapping("/create")
@@ -84,6 +87,9 @@ public class PostController {
 		
 		Page<PostListItemDto> search = postSvc.search(dto, Sort.by("id").descending());
 		model.addAttribute("page", search);
+		
+		// pagination fragment에서 사용할 현재 요청 주소 정보
+		model.addAttribute("baseUrl", "/post/search");
 		
 		return "post/list";
 	}
