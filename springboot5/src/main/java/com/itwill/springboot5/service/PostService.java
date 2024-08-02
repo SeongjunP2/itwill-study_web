@@ -65,8 +65,9 @@ public class PostService {
 		return post;
 	}
 	
+	@Transactional
 	public void delete(Long id) {
-		log.debug("delete(id={})", id);
+		log.info("delete(id={})", id);
 		
 		postRepo.deleteById(id);
 	}

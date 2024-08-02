@@ -14,3 +14,18 @@ values ('Test title', 'Test content', 'Test author');
 commit;
 
 select * from posts;
+
+create table comments (
+    id number(9) generated as identity,
+    post_id number(9) not null,
+    ctext varchar2(500 char) not null,
+    writer varchar2(20 char) not null,
+    created_time timestamp,
+    modified_time timestamp,
+    constraint comments_pk_id primary key(id)
+);
+
+alter table comments
+add constraint fk_comments_ref_posts
+    foreign key (post_id) references posts (id)
+    on delete cascade;

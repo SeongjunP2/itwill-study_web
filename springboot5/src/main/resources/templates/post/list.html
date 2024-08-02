@@ -47,7 +47,7 @@
                                     <a th:href="@{/post/details(id=*{id})}" th:text="*{title}"></a>
                                 </td>
                                 <td th:text="*{author}"></td>
-                                <td th:text="*{#temporals.format(modifiedTime, 'yyyy-mm-dd HH:mm:ss')}"></td>
+                                <td th:text="*{#temporals.format(modifiedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
                             </tr>
                         </tbody>
                     </table>
