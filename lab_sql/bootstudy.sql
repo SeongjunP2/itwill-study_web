@@ -29,3 +29,25 @@ alter table comments
 add constraint fk_comments_ref_posts
     foreign key (post_id) references posts (id)
     on delete cascade;
+    
+
+create table members (
+    id number(9) generated as identity,
+    username varchar2(20 char) not null,
+    password varchar2(255 char) not null,
+    email varchar2(255 char) not null,
+    created_time timestamp,
+    modified_time timestamp,
+    constraint members_pk primary key (id),
+    constraint members_uq unique (username)
+);
+
+create table member_roles (
+    member_id number(9),
+    roles varchar2(10 char)
+);
+
+alter table member_roles 
+add constraint member_roles_fk
+    foreign key (member_id) references members (id)
+    on delete cascade;
