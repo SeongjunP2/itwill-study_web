@@ -51,3 +51,9 @@ alter table member_roles
 add constraint member_roles_fk
     foreign key (member_id) references members (id)
     on delete cascade;
+    
+select m.*, r.*
+from members m
+    join member_roles r
+        on m.id = r.member_id
+where m.username = 'test2';
